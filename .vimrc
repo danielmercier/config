@@ -15,6 +15,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Shougo/deoplete.nvim'
+Plugin 'sbdchd/neoformat'
 
 " Some settings to enable the theme:
 " set number        " Show line numbers
@@ -273,3 +274,8 @@ endif
 let g:deoplete#omni#input_patterns.ocaml = '[^. *\t]\.\w*|\s\w*|#'
 
 let g:deoplete#enable_at_startup = 1
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
