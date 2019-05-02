@@ -16,6 +16,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Shougo/deoplete.nvim'
 Plugin 'sbdchd/neoformat'
+Plugin 'copy/deoplete-ocaml'
 
 " Some settings to enable the theme:
 " set number        " Show line numbers
@@ -268,12 +269,17 @@ let g:airline_powerline_fonts = 1
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 let g:syntastic_ocaml_checkers = ['merlin']
-if !exists('g:deoplete#omni_patterns')
-   let g:deoplete#omni#input_patterns = {}
-endif
-let g:deoplete#omni#input_patterns.ocaml = '[^. *\t]\.\w*|\s\w*|#'
+
+" Deoplete
 
 let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#complete_method = "complete"
+
+let g:deoplete#ignore_sources = {}
+let g:deoplete#ignore_sources.ocaml = ['buffer', 'around', 'member', 'tag']
+
+let g:deoplete#auto_complete_delay = 0
 
 augroup fmt
   autocmd!
